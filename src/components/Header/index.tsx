@@ -6,7 +6,9 @@ import logo from "./../../assets/logo.svg";
 import { HeaderBox, HeaderContainer } from "./style";
 
 export function Header() {
-  const { totalQuant } = useContext(CoffeeContext);
+  const { getTotalQuantity } = useContext(CoffeeContext);
+
+  const quantity = getTotalQuantity();
   return (
     <HeaderContainer>
       <HeaderBox>
@@ -19,7 +21,7 @@ export function Header() {
           <Link to="/checkout">
             <ShoppingCart weight="fill" size={20} />
           </Link>
-          <span>{totalQuant}</span>
+          <span>{quantity}</span>
         </div>
       </HeaderBox>
     </HeaderContainer>

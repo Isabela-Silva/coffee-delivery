@@ -67,6 +67,7 @@ export const Card = styled.div`
         box-sizing: initial;
         border-radius: 6px;
         color: ${(props) => props.theme["white"]};
+        cursor: pointer;
       }
     }
   }

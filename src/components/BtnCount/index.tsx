@@ -1,30 +1,37 @@
 import { Minus, Plus } from "phosphor-react";
-import { useState } from "react";
+import { useCoffee } from "../../hookss/useCoffee";
 import { Count } from "./styled";
-
 interface BtnCountProps {
-  updateTotalQuant: (newQuant: number) => void;
+  id: number;
 }
 // mais uma tipagem do update
-export function BtnCount({ updateTotalQuant }: BtnCountProps) {
-  const [count, setCount] = useState(0);
+export function BtnCount({ id }: BtnCountProps) {
+  const { HandleAddCoffee, HandleDeleteCoffee, shopCart } = useCoffee();
+
+  // const [count, setCount] = useState(0);
+
+  const coffeeInShopCart = shopCart.find(
+    (item) => item.coffeeProduct.id === id
+  );
+  const quantity = coffeeInShopCart ? coffeeInShopCart.quantityProduct : 0;
+
   const increment = () => {
-    setCount(count + 1);
-    updateTotalQuant(count + 1);
+    // updateTotalQuant(1);
+    HandleAddCoffee(id);
   };
   const decrement = () => {
-    if (count > 0) {
-      setCount(count - 1);
-      updateTotalQuant(count - 1);
-    }
+    // updateTotalQuant(-1);
+
+    HandleDeleteCoffee(id);
   };
+  console.log(HandleAddCoffee);
   return (
     <Count>
       <button onClick={decrement}>
         {" "}
         <Minus className="countSvg" size={20} weight="bold" />{" "}
       </button>
-      <span>{count}</span>
+      <span>{quantity}</span>
       <button onClick={increment}>
         <Plus className="countSvg" weight="bold" size={20} />
       </button>

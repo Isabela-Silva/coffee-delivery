@@ -1,22 +1,24 @@
 import { ShoppingCart } from "phosphor-react";
+import { useContext } from "react";
+import { CoffeeContext } from "../../contexts/CoffeeContext";
 import { BtnCount } from "../BtnCount";
 import { Card, ContainerCoffee } from "./styles";
 
-export interface CardType {
+interface CardType {
   id: number;
-
+  price: string;
   image: string;
-  type: string;
+  type?: string;
   name: string;
 
-  content: string;
+  content?: string;
 }
 interface ListCoffeeProps {
   card: CardType;
-  updateTotalQuant: (newQuant: number) => void;
-  // tipando o update
 }
-export function ListCoffee({ updateTotalQuant, card }: ListCoffeeProps) {
+export function ListCoffee({ card }: ListCoffeeProps) {
+  const { HandleAddCoffee } = useContext(CoffeeContext);
+  console.log(HandleAddCoffee);
   return (
     <ContainerCoffee>
       <Card>
@@ -27,10 +29,9 @@ export function ListCoffee({ updateTotalQuant, card }: ListCoffeeProps) {
 
         <footer>
           <span>
-            R$ <strong>9,90</strong>
+            R$ <strong>{card.price}</strong>
           </span>
-          <BtnCount updateTotalQuant={updateTotalQuant} />
-          {/*  updateTotal sendo passada pro componente Btn */}
+          <BtnCount id={card.id} />
           <button>
             <ShoppingCart size={25} weight="fill" />
           </button>

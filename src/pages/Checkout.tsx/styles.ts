@@ -9,6 +9,12 @@ export const CheckoutContainer = styled.div`
   align-items: start;
   justify-content: center;
   gap: 2rem;
+
+  .triangle {
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 100px solid #6bb9f0;
+  }
 `;
 export const InfoBox = styled.div`
   display: flex;
@@ -30,6 +36,7 @@ export const AdressBox = styled.div`
   }
   div.adressBox {
     background-color: ${(props) => props.theme["base-card"]};
+
     padding: 2.5rem;
     border-radius: 6px;
     margin-top: 0.9375rem;
@@ -128,47 +135,86 @@ export const PaymentBox = styled.div`
 export const RequestsBox = styled.div`
   div.requestsBox {
     background-color: ${(props) => props.theme["base-card"]};
-    padding: 2.5rem;
+    padding: 2rem;
     margin-top: 0.9375rem;
     border-radius: 6px 44px 6px 44px;
     display: flex;
     flex-direction: column;
-    header {
-      display: flex;
-      img {
-        max-width: 4rem;
-        padding-right: 1.25rem;
-        box-sizing: initial;
-      }
+  }
+  div.coffeeProduct {
+    display: flex;
+    gap: 0.9rem;
+    padding: 2rem;
+    border-bottom: 1px solid ${(props) => props.theme["base-button"]};
+    justify-content: space-between;
+    img {
+      width: 6rem;
+    }
 
-      strong {
-        width: 100%;
+    strong {
+      font-family: "Roboto", sans-serif;
+      font-size: 1rem;
+      width: 4rem;
+    }
+    div.coffeeInfo {
+      width: 13rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      span {
+        font-family: "Roboto", sans-serif;
+        font-size: 1rem;
+        color: ${(props) => props.theme["base-subtitle"]};
+      }
+      div.coffeeButtons {
         display: flex;
-        width: 4rem; /* em duvida se esse strong tem que ter width*/
+        gap: 0.8rem;
+        button {
+          display: flex;
+          border: none;
+          background-color: ${(props) => props.theme["base-button"]};
+          padding: 0.5rem;
+          gap: 0.2rem;
+          border-radius: 8px;
+          color: ${(props) => props.theme["base-text"]};
+          font-family: "Roboto", sans-serif;
+          font-size: 0.75rem;
+          cursor: pointer;
+
+          &:hover {
+            border: 1px solid ${(props) => props.theme["purple-dark"]};
+            background-color: ${(props) => props.theme["purple-light"]};
+          }
+        }
+
+        button svg {
+          color: ${(props) => props.theme["purple-dark"]};
+        }
       }
     }
   }
-`;
+  footer {
+    padding-top: 1.5rem;
+    div {
+      font-family: "Roboto", sans-serif;
 
-export const RequestButtons = styled.div`
-  width: 100%;
-  display: flex;
-  gap: 0.5rem;
-  margin-right: 2rem;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    button {
+      padding: 1rem;
+      width: 100%;
+      color: ${(props) => props.theme["white"]};
+      background-color: #f78ad0;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
 
-  button {
-    border: none;
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    font-size: 0.75rem;
-    font-family: "Roboto", sans-serif;
-    background-color: ${(props) => props.theme["base-button"]};
-    color: ${(props) => props.theme["base-text"]};
-    padding: 0.5rem;
-    border-radius: 6px;
-  }
-  button svg {
-    color: ${(props) => props.theme["purple"]};
+      &:hover {
+        border: 1px solid ${(props) => props.theme["purple-dark"]};
+      }
+    }
   }
 `;

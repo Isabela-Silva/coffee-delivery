@@ -6,21 +6,25 @@ import {
   Money,
   Trash,
 } from "phosphor-react";
-import cofTrad from "../../assets/cof-trad.svg";
+import { useContext } from "react";
 import { BtnCount } from "../../components/BtnCount";
 import { Header } from "../../components/Header";
+import { CoffeeContext } from "../../contexts/CoffeeContext";
 import {
   AdressBox,
   CheckoutContainer,
   InfoBox,
   PaymentBox,
-  RequestButtons,
   RequestsBox,
 } from "./styles";
-interface CheckoutProps {
-  updateTotalQuant: (newQuant: number) => void;
-}
-export function Checkout({ updateTotalQuant }: CheckoutProps) {
+
+export function Checkout() {
+  const { shopCart, HandleDeleteCoffee, getTotalPrice, getTotalDelivery } =
+    useContext(CoffeeContext);
+
+  const totalPrice = getTotalPrice();
+  const totalDelivery = getTotalDelivery();
+
   return (
     <div>
       <Header />
@@ -51,6 +55,7 @@ export function Checkout({ updateTotalQuant }: CheckoutProps) {
               </div>
             </div>
           </AdressBox>
+
           <PaymentBox>
             <header>
               <div className="iconCurrency">
@@ -86,40 +91,41 @@ export function Checkout({ updateTotalQuant }: CheckoutProps) {
             </div>
           </PaymentBox>
         </InfoBox>
+
         <RequestsBox>
           <h3>Cafés selecionados</h3>
           <div className="requestsBox">
-            <header>
-              {/* {requestList.map((req) => {
-              return <Request />;
-            })} */}
-              <img src={cofTrad} alt="" />
-              <div>
-                <span>Expresso Tradicional</span>
-                <RequestButtons>
-                  <BtnCount updateTotalQuant={updateTotalQuant} />
-                  {/* coloquei o botao aqui, mas ele não ta todo estilizado como ta na pagina Home */}
-                  <button>
-                    <Trash size={20} />
-                    REMOVER
-                  </button>
-                </RequestButtons>
+            {shopCart.map((item) => (
+              <div className="coffeeProduct" key={item.coffeeProduct.id}>
+                <img src={item.coffeeProduct.image} alt="" />
+                <div className="coffeeInfo">
+                  <span>{item.coffeeProduct.name}</span>
+                  <div className="coffeeButtons">
+                    <BtnCount id={item.coffeeProduct.id} />
+                    <button
+                      onClick={() => HandleDeleteCoffee(item.coffeeProduct.id)}
+                    >
+                      <Trash size={20} />
+                      REMOVER
+                    </button>
+                  </div>
+                </div>
+                <strong>R$ {item.coffeeProduct.price}</strong>
+                {/* <strong>Quantidade :{item.quantityProduct}</strong> */}
               </div>
-              <strong>R$ 9,90</strong>
-            </header>
-
+            ))}
             <footer>
               <div className="totalItems">
                 <p>Total de items</p>
-                <p>R$ 29,90</p>
+                <p>R$ {totalPrice}</p>
               </div>
               <div className="delivery">
                 <p>Entrega</p>
-                <p>R$ 3,90</p>
+                <p>R$ 3.90</p>
               </div>
               <div className="total">
                 <strong>Total</strong>
-                <strong>R$ 33,20</strong>
+                <strong>R$ {totalDelivery}</strong>
               </div>
               <button>CONFIRMAR PEDIDO</button>
             </footer>
